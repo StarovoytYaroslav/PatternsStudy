@@ -13,11 +13,12 @@ import com.yaroslav.builder.Transmission;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
+import com.yaroslav.singleton.Singleton;
 
 public class Application {
 
 	public static void main(String[] args) {
-		
+		singleton();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -39,11 +40,19 @@ public class Application {
 				throw new RuntimeException("Не поддерживаемая страна : " + lang);
 		}
 	}
-	
+	// Builder
 	public static void builder() {
 		Director dir = new Director();
 		dir.setBuilder(new FordMondeoBuilder());
 		Car car = dir.buildCar();
 		System.out.println(car.toString());
+	}
+	// Singleton
+	public static void singleton() {
+		Singleton s = Singleton.getInstance();
+		s = Singleton.getInstance();
+		s = Singleton.getInstance();
+		System.out.println(s.getCounter());
+		
 	}
 }
