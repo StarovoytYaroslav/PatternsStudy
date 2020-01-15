@@ -1,7 +1,7 @@
 package com.yaroslav.singleton;
 
 public class Singleton {
-	private int counter = 0;
+	public static int counter = 0;
 	private static Singleton instance;
 	private Singleton() {
 		counter ++;
@@ -12,10 +12,6 @@ public class Singleton {
 			instance = new Singleton();
 		}
 		return instance;
-	}
-
-	public int getCounter() {
-		return counter;
 	}
 	
 }

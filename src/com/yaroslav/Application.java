@@ -13,12 +13,13 @@ import com.yaroslav.builder.Transmission;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
+import com.yaroslav.singleton.R;
 import com.yaroslav.singleton.Singleton;
 
 public class Application {
 
 	public static void main(String[] args) {
-		singleton();
+		singletonTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -52,7 +53,23 @@ public class Application {
 		Singleton s = Singleton.getInstance();
 		s = Singleton.getInstance();
 		s = Singleton.getInstance();
-		System.out.println(s.getCounter());
+		System.out.println(s.counter);	
+	}
+	// Singleton Test
+	public static void singletonTest() {
+		Thread t[] = new Thread[1000];
 		
+		for (int i = 0; i < t.length; i++) {
+			t[i] = new Thread(new R());
+			t[i].start();
+		}
+		for (int i = 0; i < t.length; i++) {
+			try {
+				t[i].join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println(Singleton.counter);
 	}
 }
