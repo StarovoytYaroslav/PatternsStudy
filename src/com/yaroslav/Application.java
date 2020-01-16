@@ -10,6 +10,11 @@ import com.yaroslav.builder.Director;
 import com.yaroslav.builder.FordMondeoBuilder;
 import com.yaroslav.builder.SubaruBuilder;
 import com.yaroslav.builder.Transmission;
+import com.yaroslav.chainofresponsibility.EmailLogger;
+import com.yaroslav.chainofresponsibility.FileLogger;
+import com.yaroslav.chainofresponsibility.Level;
+import com.yaroslav.chainofresponsibility.Logger;
+import com.yaroslav.chainofresponsibility.SMSLogger;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
@@ -19,7 +24,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 
 	public static void main(String[] args) {
-		singletonTest();
+		chainOfResponsibilityTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -72,4 +77,17 @@ public class Application {
 		}
 		System.out.println(Singleton.counter);
 	}
+
+	public static void chainOfResponsibilityTest() {
+		String message = "Все хорошо";
+		int level = Level.INFO;
+		Logger smsLog = new SMSLogger(Level.ERROR);
+		Logger fileLog = new FileLogger(Level.INFO);
+		Logger emailLog = new EmailLogger(Level.DEBUG);
+		fileLog.setNext(emailLog);
+		smsLog.setNext(fileLog);
+		smsLog.writeMessage(message, level);
+	}
 }
+
+
