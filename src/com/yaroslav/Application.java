@@ -31,13 +31,15 @@ import com.yaroslav.delegate.Square;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
+import com.yaroslav.interpreter.Context;
+import com.yaroslav.interpreter.Expression;
 import com.yaroslav.singleton.R;
 import com.yaroslav.singleton.Singleton;
 
 public class Application {
-
+	
 	public static void main(String[] args) {
-		delegateTest();
+
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -126,6 +128,11 @@ public class Application {
 		p.setGraphics(new Square());
 		p.draw();
 	}
+	//Interpreter Test
+	public static void interpreterTest() {
+		Context c = new Context();
+		Expression expr = c.evaluate("1-2+33");
+		System.out.println(expr.interpret());
+	}
 	
 }
-
