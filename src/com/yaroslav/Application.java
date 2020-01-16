@@ -15,6 +15,12 @@ import com.yaroslav.chainofresponsibility.FileLogger;
 import com.yaroslav.chainofresponsibility.Level;
 import com.yaroslav.chainofresponsibility.Logger;
 import com.yaroslav.chainofresponsibility.SMSLogger;
+import com.yaroslav.chainofresponsibilityatm.Money;
+import com.yaroslav.chainofresponsibilityatm.NoteModule;
+import com.yaroslav.chainofresponsibilityatm.NoteModule100;
+import com.yaroslav.chainofresponsibilityatm.NoteModule1000;
+import com.yaroslav.chainofresponsibilityatm.NoteModule500;
+import com.yaroslav.chainofresponsibilityatm.NoteModule5000;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
@@ -24,7 +30,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 
 	public static void main(String[] args) {
-		chainOfResponsibilityTest();
+		chainOfResponsibilityAtmTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -88,6 +94,16 @@ public class Application {
 		smsLog.setNext(fileLog);
 		smsLog.writeMessage(message, level);
 	}
-}
 
+	public static void chainOfResponsibilityAtmTest() {
+		NoteModule nM5000 = new NoteModule5000();
+		NoteModule nM1000 = new NoteModule1000();
+		NoteModule nM500 = new NoteModule500();
+		NoteModule nM100 = new NoteModule100();
+		nM5000.setNext(nM1000);
+		nM1000.setNext(nM500);
+		nM500.setNext(nM100);
+		nM5000.takeMoney(new Money(21600));
+	}
+}
 
