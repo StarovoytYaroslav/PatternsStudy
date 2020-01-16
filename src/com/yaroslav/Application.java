@@ -21,6 +21,11 @@ import com.yaroslav.chainofresponsibilityatm.NoteModule100;
 import com.yaroslav.chainofresponsibilityatm.NoteModule1000;
 import com.yaroslav.chainofresponsibilityatm.NoteModule500;
 import com.yaroslav.chainofresponsibilityatm.NoteModule5000;
+import com.yaroslav.command.Comp;
+import com.yaroslav.command.ResetCommand;
+import com.yaroslav.command.StartCommand;
+import com.yaroslav.command.StopCommand;
+import com.yaroslav.command.User;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
@@ -30,7 +35,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 
 	public static void main(String[] args) {
-		chainOfResponsibilityAtmTest();
+		commandTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -83,7 +88,7 @@ public class Application {
 		}
 		System.out.println(Singleton.counter);
 	}
-
+	// Chain of responsibility Test
 	public static void chainOfResponsibilityTest() {
 		String message = "Все хорошо";
 		int level = Level.ERROR;
@@ -94,7 +99,7 @@ public class Application {
 		smsLog.setNext(fileLog);
 		smsLog.writeMessage(message, level);
 	}
-
+	// Chain of responsibility ATM Test
 	public static void chainOfResponsibilityAtmTest() {
 		NoteModule nM5000 = new NoteModule5000();
 		NoteModule nM1000 = new NoteModule1000();
@@ -104,6 +109,15 @@ public class Application {
 		nM1000.setNext(nM500);
 		nM500.setNext(nM100);
 		nM5000.takeMoney(new Money(20100));
+	}
+	// Command Test
+	public static void commandTest() {
+		Comp c = new Comp();
+		User u = new User(new StartCommand(c), new StopCommand(c), new ResetCommand(c));
+		
+		u.startComputer();
+		u.resetComputer();
+		u.stopComputer();
 	}
 }
 
