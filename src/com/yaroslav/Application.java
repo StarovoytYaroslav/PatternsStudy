@@ -80,7 +80,7 @@ public class Application {
 
 	public static void chainOfResponsibilityTest() {
 		String message = "Все хорошо";
-		int level = Level.INFO;
+		int level = Level.ERROR;
 		Logger smsLog = new SMSLogger(Level.ERROR);
 		Logger fileLog = new FileLogger(Level.INFO);
 		Logger emailLog = new EmailLogger(Level.DEBUG);
