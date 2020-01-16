@@ -103,7 +103,7 @@ public class Application {
 		nM5000.setNext(nM1000);
 		nM1000.setNext(nM500);
 		nM500.setNext(nM100);
-		nM5000.takeMoney(new Money(21600));
+		nM5000.takeMoney(new Money(20100));
 	}
 }
 
