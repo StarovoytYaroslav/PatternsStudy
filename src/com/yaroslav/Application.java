@@ -35,7 +35,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 
 	public static void main(String[] args) {
-		commandTest();
+		
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -114,10 +114,14 @@ public class Application {
 	public static void commandTest() {
 		Comp c = new Comp();
 		User u = new User(new StartCommand(c), new StopCommand(c), new ResetCommand(c));
-		
 		u.startComputer();
 		u.resetComputer();
 		u.stopComputer();
 	}
+	// Delegate Test
+	public static void delegateTest() {
+		
+	}
+	
 }
 
