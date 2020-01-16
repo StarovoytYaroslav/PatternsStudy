@@ -33,13 +33,15 @@ import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
 import com.yaroslav.interpreter.Context;
 import com.yaroslav.interpreter.Expression;
+import com.yaroslav.iterator.Tasks;
+import com.yaroslav.iterator.Iterator;
 import com.yaroslav.singleton.R;
 import com.yaroslav.singleton.Singleton;
 
 public class Application {
 	
 	public static void main(String[] args) {
-
+		iteratorTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -134,5 +136,12 @@ public class Application {
 		Expression expr = c.evaluate("1-2+33");
 		System.out.println(expr.interpret());
 	}
-	
+	// Iterator Test
+	public static void iteratorTest() {
+		Tasks c = new Tasks();		
+		Iterator it = c.getIterator();
+		while(it.hasNext()) {
+			System.out.println((String) it.next());
+		}
+	}
 }
