@@ -34,6 +34,9 @@ import com.yaroslav.factoryMethod.WatchMaker;
 import com.yaroslav.interpreter.Context;
 import com.yaroslav.interpreter.Expression;
 import com.yaroslav.iterator.Tasks;
+import com.yaroslav.mediator.Admin;
+import com.yaroslav.mediator.SimpleUser;
+import com.yaroslav.mediator.TextChat;
 import com.yaroslav.iterator.Iterator;
 import com.yaroslav.singleton.R;
 import com.yaroslav.singleton.Singleton;
@@ -41,7 +44,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 	
 	public static void main(String[] args) {
-		iteratorTest();
+		mediatorTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -143,5 +146,22 @@ public class Application {
 		while(it.hasNext()) {
 			System.out.println((String) it.next());
 		}
+	}
+	// Mediator Test
+	public static void mediatorTest() {
+		TextChat chat = new TextChat();
+		Admin admin = new Admin(chat);
+		SimpleUser user1 = new SimpleUser(chat);
+		SimpleUser user2 = new SimpleUser(chat);
+		SimpleUser user3 = new SimpleUser(chat);
+		
+		chat.setAdmin(admin);
+		chat.addUser(user1);
+		chat.addUser(user2);
+		chat.addUser(user3);
+		
+		user1.sendMessage("Hi. i'm User1");
+		admin.sendMessage("Daddy's Home!");
+		
 	}
 }
