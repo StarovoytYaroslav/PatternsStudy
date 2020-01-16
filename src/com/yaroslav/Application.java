@@ -26,6 +26,8 @@ import com.yaroslav.command.ResetCommand;
 import com.yaroslav.command.StartCommand;
 import com.yaroslav.command.StopCommand;
 import com.yaroslav.command.User;
+import com.yaroslav.delegate.Painter;
+import com.yaroslav.delegate.Square;
 import com.yaroslav.factoryMethod.DigitalWatchMaker;
 import com.yaroslav.factoryMethod.RomeWatchMaker;
 import com.yaroslav.factoryMethod.WatchMaker;
@@ -35,7 +37,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 
 	public static void main(String[] args) {
-		
+		delegateTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -120,7 +122,9 @@ public class Application {
 	}
 	// Delegate Test
 	public static void delegateTest() {
-		
+		Painter p = new Painter();
+		p.setGraphics(new Square());
+		p.draw();
 	}
 	
 }

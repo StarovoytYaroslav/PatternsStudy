@@ -1,4 +1,4 @@
-package com.yaroslav.delegate;
+package com.yaroslav.simpledelegate;
 
 public class A {
 	public void f() { 
