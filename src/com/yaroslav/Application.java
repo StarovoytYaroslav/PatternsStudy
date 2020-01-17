@@ -34,6 +34,8 @@ import com.yaroslav.factoryMethod.WatchMaker;
 import com.yaroslav.interpreter.Context;
 import com.yaroslav.interpreter.Expression;
 import com.yaroslav.iterator.Tasks;
+import com.yaroslav.memento.File;
+import com.yaroslav.memento.Game;
 import com.yaroslav.simplemediator.Admin;
 import com.yaroslav.simplemediator.SimpleUser;
 import com.yaroslav.simplemediator.TextChat;
@@ -44,7 +46,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 	
 	public static void main(String[] args) {
-		mediatorTest();
+		mementoTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -163,7 +165,7 @@ public class Application {
 		user1.sendMessage("Hi. i'm User1");
 		admin.sendMessage("Daddy's Home!");
 	}
-	//Mediator Test
+	// Mediator Test
 	public static void mediatorTest() {
 		com.yaroslav.mediator.TextChat chat = new com.yaroslav.mediator.TextChat();
 		com.yaroslav.mediator.User admin = new com.yaroslav.mediator.Admin(chat, "Ivan Ivanovich");
@@ -178,6 +180,19 @@ public class Application {
 		
 		u2.setEnable(false);
 		
-		u1.sendMessage("Hi there!");
+		admin.sendMessage("Hi there!");
+	}
+	// Memento Test
+	public static void mementoTest() {
+		Game game = new Game();
+		game.set("LVL_1", 300000);
+		System.out.println(game);
+		
+		File file = new File();
+		file.setSave(game.save());
+		game.set("LVL_25", 500000000);
+		System.out.println(game);
+		game.load(file.getSave());
+		System.out.println(game);
 	}
 }
