@@ -36,6 +36,9 @@ import com.yaroslav.interpreter.Expression;
 import com.yaroslav.iterator.Tasks;
 import com.yaroslav.memento.File;
 import com.yaroslav.memento.Game;
+import com.yaroslav.observer.ConsoleObserver;
+import com.yaroslav.observer.FileObserver;
+import com.yaroslav.observer.MeteoStation;
 import com.yaroslav.simplemediator.Admin;
 import com.yaroslav.simplemediator.SimpleUser;
 import com.yaroslav.simplemediator.TextChat;
@@ -46,7 +49,7 @@ import com.yaroslav.singleton.Singleton;
 public class Application {
 	
 	public static void main(String[] args) {
-		mementoTest();
+		observerTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -194,5 +197,14 @@ public class Application {
 		System.out.println(game);
 		game.load(file.getSave());
 		System.out.println(game);
+	}
+	// Observer Test
+	public static void observerTest() {
+		MeteoStation station = new MeteoStation();
+		
+		station.addObserver(new ConsoleObserver());
+		station.addObserver(new FileObserver());
+		
+		station.setMeasurments(45, 2000);
 	}
 }
