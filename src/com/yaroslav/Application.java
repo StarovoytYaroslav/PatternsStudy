@@ -34,9 +34,9 @@ import com.yaroslav.factoryMethod.WatchMaker;
 import com.yaroslav.interpreter.Context;
 import com.yaroslav.interpreter.Expression;
 import com.yaroslav.iterator.Tasks;
-import com.yaroslav.mediator.Admin;
-import com.yaroslav.mediator.SimpleUser;
-import com.yaroslav.mediator.TextChat;
+import com.yaroslav.simplemediator.Admin;
+import com.yaroslav.simplemediator.SimpleUser;
+import com.yaroslav.simplemediator.TextChat;
 import com.yaroslav.iterator.Iterator;
 import com.yaroslav.singleton.R;
 import com.yaroslav.singleton.Singleton;
@@ -147,8 +147,8 @@ public class Application {
 			System.out.println((String) it.next());
 		}
 	}
-	// Mediator Test
-	public static void mediatorTest() {
+	// Simple mediator Test
+	public static void simpleMediatorTest() {
 		TextChat chat = new TextChat();
 		Admin admin = new Admin(chat);
 		SimpleUser user1 = new SimpleUser(chat);
@@ -162,6 +162,22 @@ public class Application {
 		
 		user1.sendMessage("Hi. i'm User1");
 		admin.sendMessage("Daddy's Home!");
+	}
+	//Mediator Test
+	public static void mediatorTest() {
+		com.yaroslav.mediator.TextChat chat = new com.yaroslav.mediator.TextChat();
+		com.yaroslav.mediator.User admin = new com.yaroslav.mediator.Admin(chat, "Ivan Ivanovich");
+		com.yaroslav.mediator.User u1 = new com.yaroslav.mediator.SimpleUser(chat, "Vania");
+		com.yaroslav.mediator.User u2 = new com.yaroslav.mediator.SimpleUser(chat, "Vova");
+		com.yaroslav.mediator.User u3 = new com.yaroslav.mediator.SimpleUser(chat, "Sasha");
 		
+		chat.setAdmin(admin);
+		chat.addUser(u1);
+		chat.addUser(u2);
+		chat.addUser(u3);
+		
+		u2.setEnable(false);
+		
+		u1.sendMessage("Hi there!");
 	}
 }

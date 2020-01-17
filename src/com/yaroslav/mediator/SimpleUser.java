@@ -1,20 +1,14 @@
 package com.yaroslav.mediator;
 
-public class SimpleUser implements User {
-	private Chat chat;
-	
-	public SimpleUser(Chat chat) {
-		this.chat = chat;
+public class SimpleUser extends User {
+
+	public SimpleUser(Chat chat, String name) {
+		super(chat, name);
 	}
 
 	@Override
-	public void sendMessage(String message) {
-		chat.sendMessage(message, this);
-	}
-
-	@Override
-	public void getMessage(String message) {	
-		System.out.println("User receives message: " + message);
+	public void getMessage(String message) {
+		System.out.println("User " + getName() + " receives message: " + message);
 	}
 
 }

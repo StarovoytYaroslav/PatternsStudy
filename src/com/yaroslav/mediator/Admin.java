@@ -1,19 +1,14 @@
 package com.yaroslav.mediator;
 
-public class Admin implements User {
-	private Chat chat;
-	
-	public Admin(Chat chat) {
-		this.chat = chat;
-	}
+public class Admin extends User {
 
-	@Override
-	public void sendMessage(String message) {
-		chat.sendMessage(message, this);
+	public Admin(Chat chat, String name) {
+		super(chat, name);
 	}
 
 	@Override
 	public void getMessage(String message) {
-		System.out.println("Admin receives message: " + message);
+		System.out.println("Admin " + getName() + " receives message: " + message);
 	}
+
 }
