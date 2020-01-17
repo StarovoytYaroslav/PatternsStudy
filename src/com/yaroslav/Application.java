@@ -45,11 +45,16 @@ import com.yaroslav.simplemediator.TextChat;
 import com.yaroslav.iterator.Iterator;
 import com.yaroslav.singleton.R;
 import com.yaroslav.singleton.Singleton;
+import com.yaroslav.statehumanexample.Human;
+import com.yaroslav.statehumanexample.Work;
+import com.yaroslav.stateradioexample.Radio;
+import com.yaroslav.stateradioexample.RadioDFM;
+import com.yaroslav.stateradioexample.Station;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		observerTest();
+		stateTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -206,5 +211,24 @@ public class Application {
 		station.addObserver(new FileObserver());
 		
 		station.setMeasurments(45, 2000);
+	}
+	// State radio example Test
+	public static void stateRadioTest() {
+		Station dfm = new RadioDFM();
+		Radio radio = new Radio();
+		radio.setStation(dfm);
+		
+		for (int i = 0; i < 10; i++) {
+			radio.play();
+			radio.nextStation();
+		}
+	}
+	// State human example Test
+	public static void stateTest() {
+		Human secur = new Human();
+		secur.setstate(new Work());
+		for (int i = 0; i < 365; i++) {
+			secur.doSomething();
+		}
 	}
 }
