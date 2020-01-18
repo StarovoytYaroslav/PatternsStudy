@@ -50,11 +50,18 @@ import com.yaroslav.statehumanexample.Work;
 import com.yaroslav.stateradioexample.Radio;
 import com.yaroslav.stateradioexample.RadioDFM;
 import com.yaroslav.stateradioexample.Station;
+import com.yaroslav.visitor.BodyElement;
+import com.yaroslav.visitor.CarElement;
+import com.yaroslav.visitor.Element;
+import com.yaroslav.visitor.EngineElement;
+import com.yaroslav.visitor.HooliganVisitor;
+import com.yaroslav.visitor.MechanicVisitor;
+import com.yaroslav.visitor.Visitor;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		stateTest();
+		visitorTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -230,5 +237,13 @@ public class Application {
 		for (int i = 0; i < 365; i++) {
 			secur.doSomething();
 		}
+	}
+	//Visitor Test
+	public static void visitorTest() {
+		Element car = new CarElement();
+		
+		Visitor hooligan = new MechanicVisitor();
+		car.accept(hooligan);
+		
 	}
 }
