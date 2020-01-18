@@ -57,9 +57,9 @@ import com.yaroslav.creational.factoryMethod.RomeWatchMaker;
 import com.yaroslav.creational.factoryMethod.WatchMaker;
 import com.yaroslav.creational.singleton.R;
 import com.yaroslav.creational.singleton.Singleton;
-import com.yaroslav.delegate.Painter;
-import com.yaroslav.delegate.Square;
-import com.yaroslav.simpledelegate.A;
+import com.yaroslav.fundamental.delegate.Painter;
+import com.yaroslav.fundamental.delegate.Square;
+import com.yaroslav.fundamental.simpledelegate.A;
 
 public class Application {
 	

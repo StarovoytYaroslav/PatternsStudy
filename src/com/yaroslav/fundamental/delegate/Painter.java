@@ -1,4 +1,4 @@
-package com.yaroslav.delegate;
+package com.yaroslav.fundamental.delegate;
 
 public class Painter {
 	private Graphics graphics;

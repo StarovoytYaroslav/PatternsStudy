@@ -1,4 +1,4 @@
-package com.yaroslav.simpledelegate;
+package com.yaroslav.fundamental.simpledelegate;
 
 public class B {
 	private A a = new A();
