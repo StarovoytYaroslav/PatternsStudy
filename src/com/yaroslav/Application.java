@@ -1,67 +1,70 @@
 package com.yaroslav;
 
-import com.yaroslav.abstractFactory.DeviceFactory;
-import com.yaroslav.abstractFactory.EngDeviceFactory;
-import com.yaroslav.abstractFactory.Mouse;
-import com.yaroslav.abstractFactory.RusDeviceFactory;
-import com.yaroslav.builder.Car;
-import com.yaroslav.builder.CarBuilder;
-import com.yaroslav.builder.Director;
-import com.yaroslav.builder.FordMondeoBuilder;
-import com.yaroslav.builder.SubaruBuilder;
-import com.yaroslav.builder.Transmission;
-import com.yaroslav.chainofresponsibility.EmailLogger;
-import com.yaroslav.chainofresponsibility.FileLogger;
-import com.yaroslav.chainofresponsibility.Level;
-import com.yaroslav.chainofresponsibility.Logger;
-import com.yaroslav.chainofresponsibility.SMSLogger;
-import com.yaroslav.chainofresponsibilityatm.Money;
-import com.yaroslav.chainofresponsibilityatm.NoteModule;
-import com.yaroslav.chainofresponsibilityatm.NoteModule100;
-import com.yaroslav.chainofresponsibilityatm.NoteModule1000;
-import com.yaroslav.chainofresponsibilityatm.NoteModule500;
-import com.yaroslav.chainofresponsibilityatm.NoteModule5000;
-import com.yaroslav.command.Comp;
-import com.yaroslav.command.ResetCommand;
-import com.yaroslav.command.StartCommand;
-import com.yaroslav.command.StopCommand;
-import com.yaroslav.command.User;
+import com.yaroslav.behavioral.chainofresponsibility.EmailLogger;
+import com.yaroslav.behavioral.chainofresponsibility.FileLogger;
+import com.yaroslav.behavioral.chainofresponsibility.Level;
+import com.yaroslav.behavioral.chainofresponsibility.Logger;
+import com.yaroslav.behavioral.chainofresponsibility.SMSLogger;
+import com.yaroslav.behavioral.chainofresponsibilityatm.Money;
+import com.yaroslav.behavioral.chainofresponsibilityatm.NoteModule;
+import com.yaroslav.behavioral.chainofresponsibilityatm.NoteModule100;
+import com.yaroslav.behavioral.chainofresponsibilityatm.NoteModule1000;
+import com.yaroslav.behavioral.chainofresponsibilityatm.NoteModule500;
+import com.yaroslav.behavioral.chainofresponsibilityatm.NoteModule5000;
+import com.yaroslav.behavioral.command.Comp;
+import com.yaroslav.behavioral.command.ResetCommand;
+import com.yaroslav.behavioral.command.StartCommand;
+import com.yaroslav.behavioral.command.StopCommand;
+import com.yaroslav.behavioral.command.User;
+import com.yaroslav.behavioral.interpreter.Context;
+import com.yaroslav.behavioral.interpreter.Expression;
+import com.yaroslav.behavioral.iterator.Iterator;
+import com.yaroslav.behavioral.iterator.Tasks;
+import com.yaroslav.behavioral.memento.File;
+import com.yaroslav.behavioral.memento.Game;
+import com.yaroslav.behavioral.observer.ConsoleObserver;
+import com.yaroslav.behavioral.observer.FileObserver;
+import com.yaroslav.behavioral.observer.MeteoStation;
+import com.yaroslav.behavioral.simplemediator.Admin;
+import com.yaroslav.behavioral.simplemediator.SimpleUser;
+import com.yaroslav.behavioral.simplemediator.TextChat;
+import com.yaroslav.behavioral.statehumanexample.Human;
+import com.yaroslav.behavioral.statehumanexample.Work;
+import com.yaroslav.behavioral.stateradioexample.Radio;
+import com.yaroslav.behavioral.stateradioexample.RadioDFM;
+import com.yaroslav.behavioral.stateradioexample.Station;
+import com.yaroslav.behavioral.templatemethod.B;
+import com.yaroslav.behavioral.templatemethod.C;
+import com.yaroslav.behavioral.visitor.BodyElement;
+import com.yaroslav.behavioral.visitor.CarElement;
+import com.yaroslav.behavioral.visitor.Element;
+import com.yaroslav.behavioral.visitor.EngineElement;
+import com.yaroslav.behavioral.visitor.HooliganVisitor;
+import com.yaroslav.behavioral.visitor.MechanicVisitor;
+import com.yaroslav.behavioral.visitor.Visitor;
+import com.yaroslav.creational.abstractFactory.DeviceFactory;
+import com.yaroslav.creational.abstractFactory.EngDeviceFactory;
+import com.yaroslav.creational.abstractFactory.Mouse;
+import com.yaroslav.creational.abstractFactory.RusDeviceFactory;
+import com.yaroslav.creational.builder.Car;
+import com.yaroslav.creational.builder.CarBuilder;
+import com.yaroslav.creational.builder.Director;
+import com.yaroslav.creational.builder.FordMondeoBuilder;
+import com.yaroslav.creational.builder.SubaruBuilder;
+import com.yaroslav.creational.builder.Transmission;
+import com.yaroslav.creational.factoryMethod.DigitalWatchMaker;
+import com.yaroslav.creational.factoryMethod.RomeWatchMaker;
+import com.yaroslav.creational.factoryMethod.WatchMaker;
+import com.yaroslav.creational.singleton.R;
+import com.yaroslav.creational.singleton.Singleton;
 import com.yaroslav.delegate.Painter;
 import com.yaroslav.delegate.Square;
-import com.yaroslav.factoryMethod.DigitalWatchMaker;
-import com.yaroslav.factoryMethod.RomeWatchMaker;
-import com.yaroslav.factoryMethod.WatchMaker;
-import com.yaroslav.interpreter.Context;
-import com.yaroslav.interpreter.Expression;
-import com.yaroslav.iterator.Tasks;
-import com.yaroslav.memento.File;
-import com.yaroslav.memento.Game;
-import com.yaroslav.observer.ConsoleObserver;
-import com.yaroslav.observer.FileObserver;
-import com.yaroslav.observer.MeteoStation;
-import com.yaroslav.simplemediator.Admin;
-import com.yaroslav.simplemediator.SimpleUser;
-import com.yaroslav.simplemediator.TextChat;
-import com.yaroslav.iterator.Iterator;
-import com.yaroslav.singleton.R;
-import com.yaroslav.singleton.Singleton;
-import com.yaroslav.statehumanexample.Human;
-import com.yaroslav.statehumanexample.Work;
-import com.yaroslav.stateradioexample.Radio;
-import com.yaroslav.stateradioexample.RadioDFM;
-import com.yaroslav.stateradioexample.Station;
-import com.yaroslav.visitor.BodyElement;
-import com.yaroslav.visitor.CarElement;
-import com.yaroslav.visitor.Element;
-import com.yaroslav.visitor.EngineElement;
-import com.yaroslav.visitor.HooliganVisitor;
-import com.yaroslav.visitor.MechanicVisitor;
-import com.yaroslav.visitor.Visitor;
+import com.yaroslav.simpledelegate.A;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		visitorTest();
+		templateMethodTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -182,11 +185,11 @@ public class Application {
 	}
 	// Mediator Test
 	public static void mediatorTest() {
-		com.yaroslav.mediator.TextChat chat = new com.yaroslav.mediator.TextChat();
-		com.yaroslav.mediator.User admin = new com.yaroslav.mediator.Admin(chat, "Ivan Ivanovich");
-		com.yaroslav.mediator.User u1 = new com.yaroslav.mediator.SimpleUser(chat, "Vania");
-		com.yaroslav.mediator.User u2 = new com.yaroslav.mediator.SimpleUser(chat, "Vova");
-		com.yaroslav.mediator.User u3 = new com.yaroslav.mediator.SimpleUser(chat, "Sasha");
+		com.yaroslav.behavioral.mediator.TextChat chat = new com.yaroslav.behavioral.mediator.TextChat();
+		com.yaroslav.behavioral.mediator.User admin = new com.yaroslav.behavioral.mediator.Admin(chat, "Ivan Ivanovich");
+		com.yaroslav.behavioral.mediator.User u1 = new com.yaroslav.behavioral.mediator.SimpleUser(chat, "Vania");
+		com.yaroslav.behavioral.mediator.User u2 = new com.yaroslav.behavioral.mediator.SimpleUser(chat, "Vova");
+		com.yaroslav.behavioral.mediator.User u3 = new com.yaroslav.behavioral.mediator.SimpleUser(chat, "Sasha");
 		
 		chat.setAdmin(admin);
 		chat.addUser(u1);
@@ -245,5 +248,13 @@ public class Application {
 		Visitor hooligan = new MechanicVisitor();
 		car.accept(hooligan);
 		
+	}
+	//Template Method Example
+	public static void templateMethodTest() {
+		C a =new com.yaroslav.behavioral.templatemethod.A();
+		C b = new B();
+		a.templateMethod();
+		System.out.println();
+		b.templateMethod();
 	}
 }
