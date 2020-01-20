@@ -60,11 +60,15 @@ import com.yaroslav.creational.singleton.Singleton;
 import com.yaroslav.fundamental.delegate.Painter;
 import com.yaroslav.fundamental.delegate.Square;
 import com.yaroslav.fundamental.simpledelegate.A;
+import com.yaroslav.structural.bridge.Hatchback;
+import com.yaroslav.structural.bridge.Kia;
+import com.yaroslav.structural.bridge.Sedan;
+import com.yaroslav.structural.bridge.Skoda;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		templateMethodTest();
+		bridgeTest();
 	}
 	// Factory
 	public static WatchMaker getMakerByName(String maker) {
@@ -256,5 +260,10 @@ public class Application {
 		a.templateMethod();
 		System.out.println();
 		b.templateMethod();
+	}
+	// Bridge Test
+	public static void bridgeTest() {
+		com.yaroslav.structural.bridge.Car c = new Hatchback(new Skoda());
+		c.showDetails();
 	}
 }
