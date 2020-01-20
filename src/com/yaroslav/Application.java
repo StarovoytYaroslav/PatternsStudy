@@ -73,11 +73,15 @@ import com.yaroslav.structural.decorator.Printer;
 import com.yaroslav.structural.decorator.PrinterInterface;
 import com.yaroslav.structural.decorator.QuotesDecorator;
 import com.yaroslav.structural.decorator.RightBracketDecorator;
+import com.yaroslav.structural.facade.Computer;
+import com.yaroslav.structural.facade.DVDRom;
+import com.yaroslav.structural.facade.HDD;
+import com.yaroslav.structural.facade.Power;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		decoratorTest();
+		facadeTest();
 	}
 	// Factory Test
 	public static WatchMaker getMakerByName(String maker) {
@@ -288,5 +292,10 @@ public class Application {
 	public static void decoratorTest() {
 		PrinterInterface printer = new RightBracketDecorator(new LeftBracketDecorator(new Printer("Hello")));
 		printer.print();
+	}
+	// Facade Test
+	public static void facadeTest() {
+		Computer comp = new Computer();
+		comp.copy();
 	}
 }
