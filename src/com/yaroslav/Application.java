@@ -1,5 +1,9 @@
 package com.yaroslav;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import com.yaroslav.behavioral.chainofresponsibility.EmailLogger;
 import com.yaroslav.behavioral.chainofresponsibility.FileLogger;
 import com.yaroslav.behavioral.chainofresponsibility.Level;
@@ -77,11 +81,12 @@ import com.yaroslav.structural.facade.Computer;
 import com.yaroslav.structural.facade.DVDRom;
 import com.yaroslav.structural.facade.HDD;
 import com.yaroslav.structural.facade.Power;
+import com.yaroslav.structural.flyweight.ShapeFactory;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		facadeTest();
+		flyweightTest();
 	}
 	// Factory Test
 	public static WatchMaker getMakerByName(String maker) {
@@ -297,5 +302,24 @@ public class Application {
 	public static void facadeTest() {
 		Computer comp = new Computer();
 		comp.copy();
+	}
+	//Flyweight Test
+	public static void flyweightTest() {
+		ShapeFactory sF = new ShapeFactory();
+		
+		List<com.yaroslav.structural.flyweight.Shape> shapes = new ArrayList<com.yaroslav.structural.flyweight.Shape>();
+		shapes.add(sF.getShape("Circle"));
+		shapes.add(sF.getShape("Square"));
+		shapes.add(sF.getShape("Point"));
+		shapes.add(sF.getShape("Point"));
+		shapes.add(sF.getShape("Circle"));
+		shapes.add(sF.getShape("Point"));
+		
+		Random rand = new Random();
+		for (com.yaroslav.structural.flyweight.Shape shape : shapes) {
+			int x = rand.nextInt(100);
+			int y = rand.nextInt(100);
+			shape.draw(x,y);
+		}
 	}
 }
