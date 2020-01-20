@@ -1,5 +1,6 @@
 package com.yaroslav;
 
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -82,11 +83,13 @@ import com.yaroslav.structural.facade.DVDRom;
 import com.yaroslav.structural.facade.HDD;
 import com.yaroslav.structural.facade.Power;
 import com.yaroslav.structural.flyweight.ShapeFactory;
+import com.yaroslav.structural.proxy.ProxyImage;
+import com.yaroslav.structural.proxy.RealImage;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		flyweightTest();
+		proxyTest();
 	}
 	// Factory Test
 	public static WatchMaker getMakerByName(String maker) {
@@ -321,5 +324,10 @@ public class Application {
 			int y = rand.nextInt(100);
 			shape.draw(x,y);
 		}
+	}
+	//Proxy Test
+	public static void proxyTest() {
+		com.yaroslav.structural.proxy.Image img = new ProxyImage("ImgPath");
+		img.display();
 	}
 }
