@@ -57,6 +57,7 @@ import com.yaroslav.creational.factoryMethod.RomeWatchMaker;
 import com.yaroslav.creational.factoryMethod.WatchMaker;
 import com.yaroslav.creational.singleton.R;
 import com.yaroslav.creational.singleton.Singleton;
+import com.yaroslav.fundamental.delegate.Circle;
 import com.yaroslav.fundamental.delegate.Painter;
 import com.yaroslav.fundamental.delegate.Square;
 import com.yaroslav.fundamental.simpledelegate.A;
@@ -64,13 +65,16 @@ import com.yaroslav.structural.bridge.Hatchback;
 import com.yaroslav.structural.bridge.Kia;
 import com.yaroslav.structural.bridge.Sedan;
 import com.yaroslav.structural.bridge.Skoda;
+import com.yaroslav.structural.composite.Composite;
+import com.yaroslav.structural.composite.Shape;
+import com.yaroslav.structural.composite.Triangle;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		bridgeTest();
+		compositeTest();
 	}
-	// Factory
+	// Factory Test
 	public static WatchMaker getMakerByName(String maker) {
 		if (maker.equals("Digital"))
 			return new DigitalWatchMaker();
@@ -79,7 +83,7 @@ public class Application {
 
 		throw new RuntimeException("Не поддерживаемая производственная линия: " + maker);
 	}
-	// Abstract Factory
+	// Abstract Factory Test
 	public static DeviceFactory getFactoryByCountryCode(String lang) {
 		switch(lang) {
 			case "RU":
@@ -97,7 +101,7 @@ public class Application {
 		Car car = dir.buildCar();
 		System.out.println(car.toString());
 	}
-	// Singleton
+	// Singleton Test
 	public static void singleton() {
 		Singleton s = Singleton.getInstance();
 		s = Singleton.getInstance();
@@ -265,5 +269,14 @@ public class Application {
 	public static void bridgeTest() {
 		com.yaroslav.structural.bridge.Car c = new Hatchback(new Skoda());
 		c.showDetails();
+	}
+	//Composite Test
+	public static void compositeTest() {
+		Composite c = new Composite();
+		c.addComponent(new com.yaroslav.structural.composite.Circle());
+		c.addComponent(new com.yaroslav.structural.composite.Circle());
+		c.addComponent(new Triangle());
+		c.addComponent(new com.yaroslav.structural.composite.Square());
+		c.draw();
 	}
 }
