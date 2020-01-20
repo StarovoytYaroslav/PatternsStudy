@@ -68,11 +68,16 @@ import com.yaroslav.structural.bridge.Skoda;
 import com.yaroslav.structural.composite.Composite;
 import com.yaroslav.structural.composite.Shape;
 import com.yaroslav.structural.composite.Triangle;
+import com.yaroslav.structural.decorator.LeftBracketDecorator;
+import com.yaroslav.structural.decorator.Printer;
+import com.yaroslav.structural.decorator.PrinterInterface;
+import com.yaroslav.structural.decorator.QuotesDecorator;
+import com.yaroslav.structural.decorator.RightBracketDecorator;
 
 public class Application {
 	
 	public static void main(String[] args) {
-		compositeTest();
+		decoratorTest();
 	}
 	// Factory Test
 	public static WatchMaker getMakerByName(String maker) {
@@ -278,5 +283,10 @@ public class Application {
 		c.addComponent(new Triangle());
 		c.addComponent(new com.yaroslav.structural.composite.Square());
 		c.draw();
+	}
+	// Decorator Test
+	public static void decoratorTest() {
+		PrinterInterface printer = new RightBracketDecorator(new LeftBracketDecorator(new Printer("Hello")));
+		printer.print();
 	}
 }
